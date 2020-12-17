@@ -141,6 +141,7 @@ input[type=text] {
 }
 #shorttextbox{
   width: 25%;
+  transition: all 0.2s ease-in-out;
 }
 [type=radio] {
   border: 5px solid red;
@@ -154,15 +155,16 @@ input[type=text] {
   color: #DFDFDF;
   background-color: #4567B2;
   width: 33%;
+  transition: all 0.2s ease-in-out;
 }
 #copy {
   cursor: pointer;
   padding-left: 10px;
-  
 }
 .result-url h1 {
   font-size: x-large;
 }
 .display {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }

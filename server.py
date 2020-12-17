@@ -1,11 +1,12 @@
 from flask import Flask, redirect, request
+from flask_cors import CORS
 from bson.objectid import ObjectId
 import pymongo
 import sys
 from markupsafe import escape
 
 app = Flask(__name__)
-
+cors = CORS(app)
 crpytAlpha = "QWERTYUIOPLKJHGFDSAZXCVBNMzxvcbnmlkjhgfdsaqwertyuiop1234567890"
 
 def encrypt(code) :
@@ -66,8 +67,10 @@ def getURL(nibURL) :
 
 @app.route('/add')
 def add_service():
-    nib = getCode(request.args["q"])
-    return nib, 200
+    req = request.args["q"]
+    nib = getCode(req)
+    
+    return nib
 
 @app.route('/<nibURL>')
 def redirect_service(nibURL):
