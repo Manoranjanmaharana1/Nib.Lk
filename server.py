@@ -33,6 +33,11 @@ def getCode(longURL, shortURL):
         sys.exit(1)
     db = client.nbLinks
     myLinks = db["Links"]
+
+    longurl = myLinks.find_one({"nibURL" : shortURL})
+    if longurl is not None:
+        return "exist"
+
     nibCode = shortURL
     if shortURL == "" :
         counter = 0
@@ -64,14 +69,11 @@ def getURL(nibURL) :
     return ""
     
 
-
-
-
 @app.route('/add', methods=['POST'])
 def add_service():
     data = request.get_json()
     nib = getCode(data["longURL"], data["shortURL"])
-    return "nib.lk/" + nib
+    return nib
 
 @app.route('/<nibURL>')
 def redirect_service(nibURL):

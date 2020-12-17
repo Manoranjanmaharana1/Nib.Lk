@@ -13,9 +13,10 @@ const Modal = ({ props }) => {
 
                     <p className="modal-text" onClick={() => {
                         
-                        navigator.clipboard.writeText(props);
+                        navigator.clipboard.writeText("nib.lk/" + props);
+                        alert("👍Copied!!")
 
-                    }}> <img src="./copy.svg" alt="" width="2%" id="copy" />{props}</p>
+                    }}> <img src="./copy.svg" alt="" width="2%" id="copy" />{"nib.lk/" + props}</p>
                     <br />
                     <br />
                     <div className="close" onClick={() => {
@@ -43,11 +44,16 @@ const LinkComponent = () => {
         }
         try {
             const response = await axios.post(url, payload);
+            if(response.data !== "exist"){
             const modal = document.getElementById("myModal");
             modal.style.display = "block";
             document.querySelector("body").style.overflow = "hidden";
             console.log(response.data);
+            console.log(payload)
             setShortURL(response.data);
+            }else {
+                alert(payload.shortURL + " already exist! 🤷🏻‍♂️ Please try other combination or let the system decide. 😄")
+            }
         } catch (error) {
             console.error(error);
         }
