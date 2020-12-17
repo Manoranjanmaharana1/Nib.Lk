@@ -24,7 +24,7 @@ def encrypt(code) :
 
 
 
-def getCode(longURL):
+def getCode(longURL, shortURL):
     try:
         client = pymongo.MongoClient(
             "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
@@ -33,17 +33,19 @@ def getCode(longURL):
         sys.exit(1)
     db = client.nbLinks
     myLinks = db["Links"]
-    counter = 0
-    val = myLinks.find_one_and_update({
-        '_id': ObjectId("5fd598beeb83234f873bf04a")
-    }, {
-        '$inc': {
-            'counter': 1
-        }
-    }, upsert=False)
-    if val is not None:
-        counter = val['counter']
-    nibCode = encrypt(counter)
+    nibCode = shortURL
+    if shortURL == "" :
+        counter = 0
+        val = myLinks.find_one_and_update({
+            '_id': ObjectId("5fd598beeb83234f873bf04a")
+        }, {
+            '$inc': {
+                'counter': 1
+            }
+        }, upsert=False)
+        if val is not None:
+            counter = val['counter']
+        nibCode = encrypt(counter)
     myLinks.insert_one({"nibURL" : nibCode, "longURL" : longURL})
     return nibCode
 
@@ -65,11 +67,10 @@ def getURL(nibURL) :
 
 
 
-@app.route('/add')
+@app.route('/add', methods=['POST'])
 def add_service():
-    req = request.args["q"]
-    nib = getCode(req)
-    
+    data = request.get_json()
+    nib = getCode(data["longURL"], data["shortURL"])
     return nib
 
 @app.route('/<nibURL>')
