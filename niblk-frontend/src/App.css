@@ -89,6 +89,95 @@ body {
   
 }
 
+.knobs, .layer
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button
+{
+    position: relative;
+    top: 50%;
+    width: 74px;
+    height: 36px;
+    margin: -20px auto 0 0;
+    overflow: hidden;
+}
+
+.button.r, .button.r .layer
+{
+    border-radius: 100px;
+}
+
+.button.b2
+{
+    border-radius: 2px;
+}
+
+.checkbox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs
+{
+    z-index: 2;
+}
+
+.layer
+{
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+#button-1 .knobs:before
+{
+    content: 'YES';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 10px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    background-color: #03A9F4;
+    border-radius: 50%;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+
+#button-1 .checkbox:checked + .knobs:before
+{
+    content: 'NO';
+    left: 42px;
+    background-color: #f44336;
+}
+
+#button-1 .checkbox:checked ~ .layer
+{
+    background-color: #fcebeb;
+}
+
+#button-1 .knobs, #button-1 .knobs:before, #button-1 .layer
+{
+    transition: 0.3s ease all;
+}
 .longURL-box {
   display: flex;
   justify-content: center;
@@ -96,9 +185,8 @@ body {
   padding: 1em 1em 0.5em 1em;
 }
 .shortURL-box{
-  display: flex;
-  justify-content: space-evenly; 
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto auto;
   padding: 1em 5.5em 0.5em 5.5em;
 }
 .longURL-box > form {
@@ -118,16 +206,16 @@ body {
   font-family:'Montserrat Alternates', sans-serif ;
   font-weight: 800;
 }
-.label {
-  margin-right: auto;
+#customLabel {
   font-size: larger;
   font-family:'Montserrat Alternates', sans-serif;
   color: #DFDFDF;
-  padding: 2px 5px 2px 5px;
-  width: fit-content;
-}
-#customLabel {
+  width: max-content;
+  position: relative;
+  top:-25%;
+  left: 15%;
   padding-left: 10px;
+  
 }
 input[type=text] {
   margin-right: auto;
@@ -140,31 +228,119 @@ input[type=text] {
   font-weight: 800;
 }
 #shorttextbox{
-  width: 25%;
+  width: 50%;
   transition: all 0.2s ease-in-out;
-}
-[type=radio] {
-  border: 5px solid red;
-}
-.result-url{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.6em;
-  font-family: 'Montserrat', sans-serif;
-  color: #DFDFDF;
-  background-color: #4567B2;
-  width: 33%;
-  transition: all 0.2s ease-in-out;
-}
-#copy {
-  cursor: pointer;
-  padding-left: 10px;
-}
-.result-url h1 {
-  font-size: x-large;
+  position: relative;
+  left: -40%;
 }
 .display {
   opacity: 0;
   pointer-events: none;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 5; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color : #f4f4f2;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+  padding: 20px;
+}
+
+/* The Close Button */
+.close {
+  color: #F25751;
+  border-radius: 20px;
+  border: 3px solid  #F25751 ;
+  float: right;
+  font-size: 1.3rem;
+  padding: 0.3em;
+  font-weight: bold;
+  width: 10%;
+  text-align: center;
+}
+
+.close:hover,
+.close:focus {
+  transition: all 0.25s ease-in-out;
+  background-color: #F25751;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color:#f4f4f2;
+}
+
+.modal-body {padding: 2px 16px; text-align: center;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: #f4f4f2;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+.modal-text{
+  background-color: #e8e8e8;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Righteous', cursive;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  display: inline;
+  cursor: pointer;
+}
+#copy {
+  cursor: pointer;
+  position: relative;
+  top: 5px;
+  margin-right: 10px;
+}
+#copy:hover {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.1);
 }

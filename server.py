@@ -71,7 +71,7 @@ def getURL(nibURL) :
 def add_service():
     data = request.get_json()
     nib = getCode(data["longURL"], data["shortURL"])
-    return nib
+    return "nib.lk/" + nib
 
 @app.route('/<nibURL>')
 def redirect_service(nibURL):
