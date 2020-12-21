@@ -3,26 +3,20 @@ const axios = require('axios').default;
 const url = "http://127.0.0.1:8080/add";
 
 
-const Modal = ({ props }) => {
+const BottomModal = ({ props }) => {
     return (
         <div id="myModal" className="modal">
             <div className="modal-content">
-
-
                 <div className="modal-body">
-
                     <p className="modal-text" onClick={() => {
-                        
                         navigator.clipboard.writeText("nib.lk/" + props);
                         alert("👍Copied!!")
-
                     }}> <img src="./copy.svg" alt="" width="2%" id="copy" />{"nib.lk/" + props}</p>
                     <br />
                     <br />
                     <div className="close" onClick={() => {
                         const modal = document.getElementById("myModal");
                         modal.style.display = "none";
-                        document.querySelector("body").style.overflow = "visible";
                     }}>Close</div>
 
                 </div>
@@ -34,13 +28,15 @@ const Modal = ({ props }) => {
 
 const LinkComponent = () => {
     const [shortURL, setShortURL] = useState("");
+    const [passcode, setPassword] = useState("");
 
     async function onFormSubmit(e) {
         e.preventDefault();
         const longURL = e.target.longurl.value;
         const payload = {
             longURL: longURL,
-            shortURL: shortURL
+            shortURL: shortURL,
+            password: passcode
         }
         try {
             const response = await axios.post(url, payload);
@@ -61,6 +57,9 @@ const LinkComponent = () => {
     const addCode = (e) => {
         setShortURL(e.target.value);
     }
+    const addPass = (e) => {
+        setPassword(e.target.value);
+    }
     const isDone = e => {
         if (e.target.checked) {
             document.getElementById("shorttextbox").classList.remove("display");
@@ -75,7 +74,7 @@ const LinkComponent = () => {
         <footer className="lower">
             <div className="longURL-box">
                 <form onSubmit={onFormSubmit}>
-                    <input type="text" autoComplete="off" id="longtextbox" name="longurl" placeholder="LongURL" />
+                    <input type="text" require="required" autoComplete="off" id="longtextbox" name="longurl" placeholder="LongURL" />
                     <input type="submit" className="submit-btn" value="Go" />
                 </form>
             </div>
@@ -89,8 +88,9 @@ const LinkComponent = () => {
                     </div>
                     <label id="customLabel">Custom URL</label></div>
                 <input type="text" autoComplete="off" id="shorttextbox" name="shorturl" placeholder="ShortURL" className="display" onChange={addCode} />
+                <input type="password"  require="required" autoComplete="off" id="shorttextbox" name="password" placeholder="Use this passcode for updating your url..." onChange={addPass} />
             </div>
-            <Modal props={shortURL} />
+            <BottomModal props={shortURL} />
         </footer>
     )
 }

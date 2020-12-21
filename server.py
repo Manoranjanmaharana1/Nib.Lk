@@ -24,7 +24,7 @@ def encrypt(code) :
 
 
 
-def getCode(longURL, shortURL):
+def getCode(longURL, shortURL, password):
     try:
         client = pymongo.MongoClient(
             "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
@@ -51,7 +51,7 @@ def getCode(longURL, shortURL):
         if val is not None:
             counter = val['counter']
         nibCode = encrypt(counter)
-    myLinks.insert_one({"nibURL" : nibCode, "longURL" : longURL})
+    myLinks.insert_one({"nibURL" : nibCode, "longURL" : longURL, "password" : password})
     return nibCode
 
 def getURL(nibURL) :
@@ -69,6 +69,27 @@ def getURL(nibURL) :
     return ""
 
 
+def updateURL(longURL, shortURL, password) : 
+    try:
+        client = pymongo.MongoClient(
+                "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
+    except pymongo.errors.ConfigurationError:
+            print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
+            sys.exit(1)
+    db = client.nbLinks
+    myLinks = db["Links"]
+    doc = myLinks.find_one({"nibURL" : shortURL, "password" : password})
+    if doc is None :
+        return str(False)
+    myLinks.find_one_and_update({
+            "nibURL" : shortURL
+        }, {
+            '$set': {
+                "longURL" : longURL
+            }
+        }, upsert=False)
+    return str(True)
+
 @app.route('/')
 def home_page():
     return app.send_static_file('index.html')
@@ -76,7 +97,13 @@ def home_page():
 @app.route('/add', methods=['POST'])
 def add_service():
     data = request.get_json()
-    nib = getCode(data["longURL"], data["shortURL"])
+    nib = getCode(data["longURL"], data["shortURL"], data["password"])
+    return nib
+
+@app.route('/update', methods=['POST'])
+def update_service():
+    data = request.get_json()
+    nib = updateURL(data["longURL"], data["shortURL"], data["password"])
     return nib
 
 @app.route('/<nibURL>')

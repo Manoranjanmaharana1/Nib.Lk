@@ -6,6 +6,7 @@
   padding: 0;
   box-sizing: border-box;
   outline: none;
+  overflow: hidden;
 }
 .top-container {
   height: 80vh;
@@ -232,7 +233,7 @@
   padding-left: 10px;
   
 }
-input[type=text] {
+input[type=text], input[type=password] {
   margin-right: auto;
   width: 95%;
   padding: 7px;
@@ -247,6 +248,9 @@ input[type=text] {
   transition: all 0.2s ease-in-out;
   position: relative;
   left: -40%;
+}
+#textbox{
+  margin-top: 1rem;
 }
 .display {
   opacity: 0;
@@ -284,7 +288,7 @@ input[type=text] {
 }
 
 /* The Close Button */
-.close {
+.close, .submit {
   color: #F25751;
   border-radius: 20px;
   border: 3px solid  #F25751 ;
@@ -295,11 +299,25 @@ input[type=text] {
   width: 10%;
   text-align: center;
 }
+.submit {
+  color: #03c4a1;
+  border: 3px solid  #03c4a1 ;
+  margin-right: 1rem;
+
+}
 
 .close:hover,
 .close:focus {
   transition: all 0.25s ease-in-out;
   background-color: #F25751;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.submit:hover,
+.submit:focus {
+  transition: all 0.25s ease-in-out;
+  background-color: #03c4a1;
   color: white;
   text-decoration: none;
   cursor: pointer;
@@ -342,7 +360,7 @@ input[type=text] {
 .modal-text{
   background-color: #e8e8e8;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   font-family: 'Righteous', cursive;
   font-size: 1.5em;
   margin-bottom: 10px;
@@ -375,4 +393,7 @@ input[type=text] {
   font-size: 12rem;
   font-family: 'Poppins', sans-serif;
   color: #f44336;
+}
+#modal-form {
+  background-color: #002F96;
 }
