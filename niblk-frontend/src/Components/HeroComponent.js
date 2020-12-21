@@ -2,10 +2,15 @@ import React from 'react';
 
 const Hero = () => {
 
+    const getUpdate = () => {
+     
+    }
     return (
-        <div>
+        <div className="top-container">
             <div className="nav">
+                <img src="./logo.svg" width="4.5%" alt=""/>
                 <span className="nav-font-pt1 nav-style">nib.</span><span className="nav-font-pt2 nav-style">l</span><span className="nav-font-pt1 nav-style">k</span>
+                <h3 onClick={getUpdate}>Update</h3>
                 <div className="btn">
                     <img src="./like.svg" width="20px" heigth="20px" alt="" />
                     <h1>Donate</h1>

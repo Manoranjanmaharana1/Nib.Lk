@@ -5,7 +5,7 @@ import pymongo
 import sys
 from markupsafe import escape
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="./niblk-frontend/build", static_url_path="/")
 cors = CORS(app)
 crpytAlpha = "QWERTYUIOPLKJHGFDSAZXCVBNMzxvcbnmlkjhgfdsaqwertyuiop1234567890"
 
@@ -67,7 +67,11 @@ def getURL(nibURL) :
     if longURL is not None:
         return longURL['longURL']
     return ""
-    
+
+
+@app.route('/')
+def home_page():
+    return app.send_static_file('index.html')
 
 @app.route('/add', methods=['POST'])
 def add_service():
