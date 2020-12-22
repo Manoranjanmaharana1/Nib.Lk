@@ -34,10 +34,10 @@ const LinkComponent = () => {
 
     async function onFormSubmit(e) {
         e.preventDefault();
-        if(passcode === ""){
-            alert("😱Password field is empty!! It is essential while updating the shortURL😀.")
-            return;
-        }
+        // if(passcode === ""){
+        //     alert("😱Password field is empty!! It is essential while updating the shortURL😀.")
+        //     return;
+        // }
         const longURL = e.target.longurl.value;
         const payload = {
             longURL: longURL,
@@ -82,6 +82,7 @@ const LinkComponent = () => {
             <div className="longURL-box">
                 <form onSubmit={onFormSubmit}>
                     <input type="text" required="required" autoComplete="off" id="longtextbox" name="longurl" placeholder="LongURL" />
+                    <input type="password" required="required" autoComplete="off" id="passtextbox" name="password" placeholder="Use this passcode for updating your url..." onChange={addPass} />
                     <input type="submit" className="submit-btn" value="Go" />
                 </form>
             </div>
@@ -96,7 +97,7 @@ const LinkComponent = () => {
                     <label id="customLabel">Custom URL</label></div>
                     
                 <input type="text" autoComplete="off" id="shorttextbox" name="shorturl" placeholder="ShortURL(e.g. NewURL or GoogleHashCode)" className="display" onChange={addCode} />
-                <input type="password" required="required" autoComplete="off" id="shorttextbox" name="password" placeholder="Use this passcode for updating your url..." onChange={addPass} />
+                
             </div>
             <BottomModal props={shortURL} />
         </footer>

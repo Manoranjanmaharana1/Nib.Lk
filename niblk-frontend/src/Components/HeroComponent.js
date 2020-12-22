@@ -27,9 +27,9 @@ const Modal = () => {
         <div id="formModal" className="modal">
             <div className="modal-content" id="modal-form">
                 <div className="modal-body">
-                    <input type="text" autoComplete="off" id="textbox" name="shorturl" placeholder="ShortURL" onChange={(e) => { setShortURL(e.target.value) }} />
-                    <input type="password" autoComplete="off" id="textbox" name="password" placeholder="Enter the passcode..." onChange={(e) => { setPassCode(e.target.value) }} />
-                    <input type="text" autoComplete="off" id="textbox" name="longurl" placeholder="Your new LongURL" onChange={(e) => { setLongURL(e.target.value) }} />
+                    <input type="text" autoComplete="off" id="textbox1" name="shorturl" placeholder="ShortURL" onChange={(e) => { setShortURL(e.target.value) }} />
+                    <input type="password" autoComplete="off" id="textbox2" name="password" placeholder="Enter the passcode..." onChange={(e) => { setPassCode(e.target.value) }} />
+                    <input type="text" autoComplete="off" id="textbox3" name="longurl" placeholder="Your new LongURL" onChange={(e) => { setLongURL(e.target.value) }} />
                     <br />
                     <br />
                     <div className="submit" onClick={submitForm}>Submit</div>
