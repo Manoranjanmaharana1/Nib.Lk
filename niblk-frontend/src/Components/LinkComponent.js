@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 const axios = require('axios').default;
 const url = "http://127.0.0.1:8080/add";
@@ -17,6 +18,7 @@ const BottomModal = ({ props }) => {
                     <div className="close" onClick={() => {
                         const modal = document.getElementById("myModal");
                         modal.style.display = "none";
+                        document.querySelector("body").style.overflow = "auto";
                     }}>Close</div>
 
                 </div>
@@ -32,6 +34,10 @@ const LinkComponent = () => {
 
     async function onFormSubmit(e) {
         e.preventDefault();
+        if(passcode === ""){
+            alert("😱Password field is empty!! It is essential while updating the shortURL😀.")
+            return;
+        }
         const longURL = e.target.longurl.value;
         const payload = {
             longURL: longURL,
@@ -44,8 +50,9 @@ const LinkComponent = () => {
             const modal = document.getElementById("myModal");
             modal.style.display = "block";
             document.querySelector("body").style.overflow = "hidden";
-            console.log(response.data);
-            console.log(payload)
+            // console.log(response.data);
+            // console.log(payload)
+
             setShortURL(response.data);
             }else {
                 alert(payload.shortURL + " already exist! 🤷🏻‍♂️ Please try other combination or let the system decide. 😄")
@@ -74,7 +81,7 @@ const LinkComponent = () => {
         <footer className="lower">
             <div className="longURL-box">
                 <form onSubmit={onFormSubmit}>
-                    <input type="text" require="required" autoComplete="off" id="longtextbox" name="longurl" placeholder="LongURL" />
+                    <input type="text" required="required" autoComplete="off" id="longtextbox" name="longurl" placeholder="LongURL" />
                     <input type="submit" className="submit-btn" value="Go" />
                 </form>
             </div>
@@ -87,8 +94,9 @@ const LinkComponent = () => {
                         <div className="layer"></div>
                     </div>
                     <label id="customLabel">Custom URL</label></div>
-                <input type="text" autoComplete="off" id="shorttextbox" name="shorturl" placeholder="ShortURL" className="display" onChange={addCode} />
-                <input type="password"  require="required" autoComplete="off" id="shorttextbox" name="password" placeholder="Use this passcode for updating your url..." onChange={addPass} />
+                    
+                <input type="text" autoComplete="off" id="shorttextbox" name="shorturl" placeholder="ShortURL(e.g. NewURL or GoogleHashCode)" className="display" onChange={addCode} />
+                <input type="password" required="required" autoComplete="off" id="shorttextbox" name="password" placeholder="Use this passcode for updating your url..." onChange={addPass} />
             </div>
             <BottomModal props={shortURL} />
         </footer>

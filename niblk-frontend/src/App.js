@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
 import './App.css';
 import Hero from './Components/HeroComponent';
 import LinkComponent from './Components/LinkComponent';
-import NotFound from './Components/NotFound';
 
 function App() {
+  useEffect(() => {
+    console.clear();
+  });
   return (
     <div className="App">
       <Hero/>

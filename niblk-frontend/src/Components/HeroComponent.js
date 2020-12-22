@@ -17,7 +17,7 @@ const Modal = () => {
             if (response.data !== "False") {
                 alert("👍🏻 Successfully Updated your url!!");
             } else {
-                alert("🙄 Credentials looks confusing! Kindly recheck before proceeding.");
+                alert("🙄 Credentials look confusing! Kindly recheck before proceeding.");
             }
         } catch (error) {
             console.error(error);
@@ -32,11 +32,13 @@ const Modal = () => {
                     <input type="text" autoComplete="off" id="textbox" name="longurl" placeholder="Your new LongURL" onChange={(e) => { setLongURL(e.target.value) }} />
                     <br />
                     <br />
+                    <div className="submit" onClick={submitForm}>Submit</div>
                     <div className="close" onClick={() => {
                         const modal = document.getElementById("formModal");
                         modal.style.display = "none";
+                        document.querySelector("body").style.overflow = "auto";
                     }}>Close</div>
-                    <div className="submit" onClick={submitForm}>Submit</div>
+                    
                 </div>
 
             </div>
@@ -68,10 +70,10 @@ const Hero = () => {
                     <h1>Shortify Hyperlinks, Amplify your reach</h1>
                     <br />
                     <p>
-                        An hassle-free way to handle large links to quickly reach your public. </p>
+                    An hassle-free way to handle large links to quickly reach your public. </p>
                 </div>
                 <div className="right-component">
-                    <img src="./clumsy.svg" alt="" width="85%" />
+                    <img src="./hero.png" alt="" width="65%" />
                 </div>
             </div>
             <Modal />
