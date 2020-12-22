@@ -12,7 +12,7 @@ const BottomModal = ({ props }) => {
                     <p className="modal-text" onClick={() => {
                         navigator.clipboard.writeText("nib.lk/" + props);
                         alert("👍Copied!!")
-                    }}> <img src="./copy.svg" alt="" width="2%" id="copy" />{"nib.lk/" + props}</p>
+                    }}> <img src="./images/copy.svg" alt="" width="2%" id="copy" />{"nib.lk/" + props}</p>
                     <br />
                     <br />
                     <div className="close" onClick={() => {

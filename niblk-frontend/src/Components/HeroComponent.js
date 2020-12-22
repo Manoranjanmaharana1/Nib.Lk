@@ -57,11 +57,11 @@ const Hero = () => {
     return (
         <div className="top-container">
             <div className="nav">
-                <img src="./logo.svg" width="4.5%" alt="" />
+                <img src="./images/logo.svg" width="4.5%" alt="" />
                 <span className="nav-font-pt1 nav-style">nib.</span><span className="nav-font-pt2 nav-style">l</span><span className="nav-font-pt1 nav-style">k</span>
                 <h3 onClick={getUpdate}>Update</h3>
                 <div className="btn">
-                    <img src="./like.svg" width="20px" heigth="20px" alt="" />
+                    <img src="./images/like.svg" width="20px" heigth="20px" alt="" />
                     <h1>Donate</h1>
                 </div>
             </div>
@@ -73,7 +73,7 @@ const Hero = () => {
                     An hassle-free way to handle large links to quickly reach your public. </p>
                 </div>
                 <div className="right-component">
-                    <img src="./hero.png" alt="" width="65%" />
+                    <img src="./images/hero.png" alt="" width="65%" />
                 </div>
             </div>
             <Modal />
