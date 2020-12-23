@@ -38,6 +38,8 @@ const LinkComponent = () => {
         //     alert("😱Password field is empty!! It is essential while updating the shortURL😀.")
         //     return;
         // }
+        e.target.sbmt.value = "...";
+        e.target.sbmt.style.pointerEvents = "none";
         const longURL = e.target.longurl.value;
         const payload = {
             longURL: longURL,
@@ -46,19 +48,24 @@ const LinkComponent = () => {
         }
         try {
             const response = await axios.post(url, payload);
-            if(response.data !== "exist"){
-            const modal = document.getElementById("myModal");
-            modal.style.display = "block";
-            document.querySelector("body").style.overflow = "hidden";
-            // console.log(response.data);
-            // console.log(payload)
+            
+            if (response.data !== "exist") {
+                const modal = document.getElementById("myModal");
+                modal.style.display = "block";
+                document.querySelector("body").style.overflow = "hidden";
+                // console.log(response.data);
+                // console.log(payload)
 
-            setShortURL(response.data);
-            }else {
+                setShortURL(response.data);
+            } else {
                 alert(payload.shortURL + " already exist! 🤷🏻‍♂️ Please try other combination or let the system decide. 😄")
             }
         } catch (error) {
             console.error(error);
+        }
+        finally{
+            e.target.sbmt.value = "Go";
+            e.target.sbmt.style.pointerEvents = "all";
         }
     }
     const addCode = (e) => {
@@ -83,7 +90,7 @@ const LinkComponent = () => {
                 <form onSubmit={onFormSubmit}>
                     <input type="text" required="required" autoComplete="off" id="longtextbox" name="longurl" placeholder="LongURL" />
                     <input type="password" required="required" autoComplete="off" id="passtextbox" name="password" placeholder="Use this passcode for updating your url..." onChange={addPass} />
-                    <input type="submit" className="submit-btn" value="Go" />
+                    <input type="submit" name="sbmt" className="submit-btn" value="Go" />
                 </form>
             </div>
             <div className="shortURL-box">
@@ -95,9 +102,9 @@ const LinkComponent = () => {
                         <div className="layer"></div>
                     </div>
                     <label id="customLabel">Custom URL</label></div>
-                    
+
                 <input type="text" autoComplete="off" id="shorttextbox" name="shorturl" placeholder="ShortURL(e.g. NewURL or GoogleHashCode)" className="display" onChange={addCode} />
-                
+
             </div>
             <BottomModal props={shortURL} />
         </footer>

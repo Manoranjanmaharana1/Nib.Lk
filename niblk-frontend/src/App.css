@@ -7,6 +7,19 @@
   box-sizing: border-box;
   outline: none;
 }
+.loader {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+  animation: pulse 0.5s infinite 0s ease;
+}
+.hide {
+  display : none;
+  transition: all 0.2s ease-in-out;
+}
+@keyframes pulse{ 0%{ opacity: 0; } 5%{ opacity: 0.1; } 10%{ opacity: 0.2; } 15%{ opacity: 0.3; } 20%{ opacity: 0.4; } 25%{ opacity: 0.5; } 30%{ opacity: 0.6; } 35%{ opacity: 0.7; } 40%{ opacity: 0.8; } 45%{ opacity: 0.9; } 50%{ opacity: 1; } 55%{ opacity: 0.9; } 60%{ opacity: 0.8; } 65%{ opacity: 0.7; } 70%{ opacity: 0.6; } 75%{ opacity: 0.5; } 80%{ opacity: 0.4; } 85%{ opacity: 0.3; } 90%{ opacity: 0.2; } 95%{ opacity: 0.1; } 100%{ opacity: 0.06; } } 
 .top-container {
   height: 80vh;
 }
@@ -210,7 +223,7 @@
   width: 100%;
 }
 .submit-btn{
-  background-color: #1CCA00;
+  background-color: #34e619;
   border: none;
   color: white;
   text-decoration: none;
@@ -222,6 +235,10 @@
   float: right;
   font-family:'Montserrat Alternates', sans-serif ;
   font-weight: 800;
+}
+.submit-btn:hover{
+  background-color: #1CCA00;
+  transition: all 0.3s ease-in-out;
 }
 #customLabel {
   font-size: larger;
@@ -304,7 +321,9 @@ input[type=text], input[type=password] {
   padding: 0.3em;
   font-weight: bold;
   width: 10%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 1rem;
 }
 .submit {

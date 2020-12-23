@@ -7,6 +7,13 @@ const Modal = () => {
     const [passcode, setPassCode] = useState("");
     const [longURL, setLongURL] = useState("");
     const submitForm = async() => {
+        if(shortURL === "" || longURL === "" || passcode === "" ){
+            alert("😲 Please don't leave any of these field as blank");
+            return;
+        }
+        document.getElementById("sbt-txt").classList.add("hide");
+        document.querySelector(".loader").classList.remove("hide");
+        document.querySelector(".submit").style.pointerEvents = "none";
         const payload = {
             longURL: longURL,
             shortURL: shortURL,
@@ -21,6 +28,10 @@ const Modal = () => {
             }
         } catch (error) {
             console.error(error);
+        } finally {
+            document.getElementById("sbt-txt").classList.remove("hide");
+            document.querySelector(".loader").classList.add("hide");
+            document.querySelector(".submit").style.pointerEvents = "all";
         }
     }
     return (
@@ -32,11 +43,16 @@ const Modal = () => {
                     <input type="text" autoComplete="off" id="textbox3" name="longurl" placeholder="Your new LongURL" onChange={(e) => { setLongURL(e.target.value) }} />
                     <br />
                     <br />
-                    <div className="submit" onClick={submitForm}>Submit</div>
+                    <div className="submit" onClick={submitForm}>
+                        <p id="sbt-txt">Submit</p>
+                        <div className="loader hide">
+                        </div>
+                        </div>
                     <div className="close" onClick={() => {
                         const modal = document.getElementById("formModal");
                         modal.style.display = "none";
                         document.querySelector("body").style.overflow = "auto";
+                        document.getElementById("textbox1").value = document.getElementById("textbox2").value = document.getElementById("textbox3").value = "";
                     }}>Close</div>
                     
                 </div>
