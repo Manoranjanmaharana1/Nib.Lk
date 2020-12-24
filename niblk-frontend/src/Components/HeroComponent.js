@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 const axios = require('axios').default;
-const url = "http://127.0.0.1:8080/update";
+//const url = "http://127.0.0.1:8080/update";
+const url = "https://niblk.herokuapp.com/update";
 
 const Modal = () => {
     const [shortURL, setShortURL] = useState("");

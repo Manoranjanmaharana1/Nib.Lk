@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, render_template
 from flask_cors import CORS
 from bson.objectid import ObjectId
 import pymongo
@@ -94,6 +94,10 @@ def updateURL(longURL, shortURL, password) :
 def home_page():
     return app.send_static_file('index.html')
 
+@app.route('/notfound')
+def not_found():
+    return app.send_static_file('404.html')
+
 @app.route('/add', methods=['POST'])
 def add_service():
     data = request.get_json()
@@ -111,7 +115,7 @@ def redirect_service(nibURL):
     res = getURL(escape(nibURL))
     if len(res) > 0:
         return redirect(res)
-    return redirect("https://github.com/hj1kjshdkfjs")
+    return redirect("/notfound")
 
 @app.route('/home')
 def home():
