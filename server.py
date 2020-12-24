@@ -4,7 +4,6 @@ from bson.objectid import ObjectId
 import pymongo
 import sys
 from markupsafe import escape
-from flask_frozen import Freezer
 
 app = Flask(__name__, static_folder="./niblk-frontend/build", static_url_path="/")
 cors = CORS(app)
