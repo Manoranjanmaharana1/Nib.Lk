@@ -90,18 +90,17 @@ def updateURL(longURL, shortURL, password) :
         }, upsert=False)
     return str(True)
 
-@freezer.register_generator
 @app.route('/')
 def home_page():
     return app.send_static_file('index.html')
 
-@app.route('/add/', methods=['POST'])
+@app.route('/add', methods=['POST'])
 def add_service():
     data = request.get_json()
     nib = getCode(data["longURL"], data["shortURL"], data["password"])
     return nib
 
-@app.route('/update/', methods=['POST'])
+@app.route('/update', methods=['POST'])
 def update_service():
     data = request.get_json()
     nib = updateURL(data["longURL"], data["shortURL"], data["password"])
@@ -114,7 +113,7 @@ def redirect_service(nibURL):
         return redirect(res)
     return redirect("https://github.com/hj1kjshdkfjs")
 
-@app.route('/home/')
+@app.route('/home')
 def home():
    return "hello"
 
