@@ -70,14 +70,14 @@ def getURL(nibURL) :
 
 
 def updateURL(longURL, shortURL, password) : 
-    # try:
-    #     client = pymongo.MongoClient(
-    #             "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
-    # except pymongo.errors.ConfigurationError:
-    #         print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
-    #         sys.exit(1)
-    client = pymongo.MongoClient(
+    try:
+        client = pymongo.MongoClient(
                 "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
+    except pymongo.errors.ConfigurationError:
+            print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
+            sys.exit(1)
+    # client = pymongo.MongoClient(
+    #             "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
     db = client.nbLinks
     myLinks = db["Links"]
     doc = myLinks.find_one({"nibURL" : shortURL, "password" : password})
@@ -96,9 +96,13 @@ def updateURL(longURL, shortURL, password) :
 def home_page():
     return app.send_static_file('index.html')
 
-@app.route('/notfound')
+@app.route('/niblknotfound')
 def not_found():
     return app.send_static_file('404.html')
+
+@app.route('/niblkdonate')
+def donate():
+    return app.send_static_file('payment.html')
 
 @app.route('/add', methods=['POST'])
 def add_service():
@@ -117,7 +121,7 @@ def redirect_service(nibURL):
     res = getURL(escape(nibURL))
     if len(res) > 0:
         return redirect(res)
-    return redirect("/notfound")
+    return redirect("/niblknotfound")
 
 @app.route('/home')
 def home():
