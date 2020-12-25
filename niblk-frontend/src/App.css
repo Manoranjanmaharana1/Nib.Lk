@@ -84,6 +84,8 @@ a {
 .btn:hover{
   transition: all 0.4s ease-in-out;
   background-color: black;
+}
+a:hover{
   color: white;
 }
 .left-component {
