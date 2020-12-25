@@ -11,9 +11,9 @@ const BottomModal = ({ props }) => {
             <div className="modal-content">
                 <div className="modal-body">
                     <p className="modal-text" onClick={() => {
-                        navigator.clipboard.writeText("nib.lk/" + props);
+                        navigator.clipboard.writeText("https://niblk.herokuapp.com/" + props);
                         alert("👍Copied!!")
-                    }}> <img src="./images/copy.svg" alt="" width="2%" id="copy" />{"nib.lk/" + props}</p>
+                    }}> <img src="./images/copy.svg" alt="" width="2%" id="copy" />{"https://niblk.herokuapp.com/" + props}</p>
                     <br />
                     <br />
                     <div className="close" onClick={() => {

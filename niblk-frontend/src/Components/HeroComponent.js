@@ -79,7 +79,7 @@ const Hero = () => {
                 <h3 onClick={getUpdate}>Update</h3>
                 <div className="btn">
                     <img src="./images/like.svg" width="20px" heigth="20px" alt="" />
-                    <h1>Donate</h1>
+                    <h1><a href="/niblkdonate">Donate</a></h1>
                 </div>
             </div>
             <div className="hero-component">
