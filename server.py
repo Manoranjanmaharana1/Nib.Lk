@@ -70,12 +70,14 @@ def getURL(nibURL) :
 
 
 def updateURL(longURL, shortURL, password) : 
-    try:
-        client = pymongo.MongoClient(
+    # try:
+    #     client = pymongo.MongoClient(
+    #             "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
+    # except pymongo.errors.ConfigurationError:
+    #         print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
+    #         sys.exit(1)
+    client = pymongo.MongoClient(
                 "mongodb+srv://niblkmano4:niblkmano4@cluster0.vzv6e.mongodb.net/niblk?retryWrites=true&w=majority")
-    except pymongo.errors.ConfigurationError:
-            print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
-            sys.exit(1)
     db = client.nbLinks
     myLinks = db["Links"]
     doc = myLinks.find_one({"nibURL" : shortURL, "password" : password})
